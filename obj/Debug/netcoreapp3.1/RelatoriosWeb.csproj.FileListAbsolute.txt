@@ -1,0 +1,5 @@
+C:\RelatoriosWeb\RelatoriosWeb\RelatoriosWeb\obj\Debug\netcoreapp3.1\RelatoriosWeb.csprojAssemblyReference.cache
+C:\RelatoriosWeb\RelatoriosWeb\RelatoriosWeb\obj\Debug\netcoreapp3.1\RelatoriosWeb.AssemblyInfoInputs.cache
+C:\RelatoriosWeb\RelatoriosWeb\RelatoriosWeb\obj\Debug\netcoreapp3.1\RelatoriosWeb.AssemblyInfo.cs
+C:\RelatoriosWeb\RelatoriosWeb\RelatoriosWeb\obj\Debug\netcoreapp3.1\RelatoriosWeb.TagHelpers.input.cache
+C:\RelatoriosWeb\RelatoriosWeb\RelatoriosWeb\obj\Debug\netcoreapp3.1\RelatoriosWeb.TagHelpers.output.cache

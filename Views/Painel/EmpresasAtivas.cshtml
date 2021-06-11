@@ -1,0 +1,146 @@
+﻿@model IEnumerable<RelatoriosWeb.Models.Painel_Empresas>
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <center class="nomenav">Monitoramento de Notas Fiscais Eletrônicas</center>
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a asp-controller="Painel" asp-action="Index">Home</a></li>
+                <li><a asp-controller="Painel" asp-action="RelatorioErros">Notas Com Erros</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+@{
+    ViewData["Title"] = "Grouping Search";
+    DateTime minDate = DateTime.Parse(ViewData["minDate"] as string);
+    DateTime maxDate = DateTime.Parse(ViewData["maxDate"] as string);
+}
+
+
+
+<nav class="navbar navbar-inverse-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid">
+        <form class="navbar-form navbar-left" role="search">
+            <div class="form-group">
+                <label for="minDate">
+                    <span>Dt Inicial</span>
+                </label>
+                <input type="date" class="form-control" name="minDate" value=@ViewData["minDate"] />
+            </div>
+            <div class="form-group">
+                <label for="maxDate"><span>Dt Final</span></label>
+                <input type="date" class="form-control" name="maxDate" value=@ViewData["maxDate"] />
+            </div>
+            <div class="form-group">
+                <label for="cnpjBusca">
+                    <span>Cnpj</span>
+                </label>
+                <input type="text" class="form-control" name="ccnpj" value=@ViewData["cnpjBusca"] />
+            </div>
+            <button type="submit" id="filtrar" class="btn btn-success">Filtrar</button>
+        </form>
+    </div>
+</nav>
+
+<th>
+    <span>Empresas Ativas no Período:</span>
+</th>
+
+@foreach (var item in Model.GroupBy(x => x.cnpj).Count().ToString())
+{
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item)
+    </td>
+</tr>
+}
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+    </div>
+    <div class="panel-body">
+        <table class="table table-hover">
+            <thead>
+                <tr class="active">
+                    <th>
+                        Cnpj
+                    </th>
+                    <th>
+                        Nome
+                    </th>
+                    <th>
+                        Endereço
+                    </th>
+                    <th>
+                        Bairro
+                    </th>
+                    <th>
+                        Cidade
+                    </th>
+                    <th>
+                        Estado
+                    </th>
+                    <th>
+                        Fone
+                    </th>
+                    <th>
+                        Data Ativação
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model.GroupBy(x => new { x.cnpj, x.nome, x.endereco, x.bairro, x.cidade, x.estado, x.fone, x.dt_ativacao }).Select(g => new { Key = g.Key, Itens = g.ToList() }))
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Key.cnpj)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Key.nome)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Key.endereco)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Key.bairro)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => item.Key.cidade)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Key.estado)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Key.fone)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Key.dt_ativacao)
+                        </td>
+                        <td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<style>
+    .nomenav {
+        padding-top: 50px;
+        font-size: 20px;
+    }
+</style>

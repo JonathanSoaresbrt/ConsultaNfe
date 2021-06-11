@@ -1,0 +1,157 @@
+﻿@using X.PagedList.Mvc.Core
+
+@model X.PagedList.IPagedList<RelatoriosWeb.Models.Painel>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <center class="nomenav">Monitoramento de Notas Fiscais Eletrônicas</center>
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a asp-controller="Painel" asp-action="Index">Home</a></li>
+                <li><a asp-controller="Painel" asp-action="RelatorioErros">Notas Com Erros</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+@{
+    ViewData["Title"] = "Grouping Search";
+    DateTime minDate = DateTime.Parse(ViewData["minDate"] as string);
+    DateTime maxDate = DateTime.Parse(ViewData["maxDate"] as string);
+}
+
+<nav class="navbar navbar-inverse-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid">
+        <form class="navbar-form navbar-left" role="search">
+            <div class="form-group">
+                <label for="minDate">
+                    <span>Dt Inicial</span>
+                </label>
+                <input type="date" class="form-control" name="minDate" value=@ViewData["minDate"] />
+            </div>
+            <div class="form-group">
+                <label for="maxDate"><span>Dt Final</span></label>
+                <input type="date" class="form-control" name="maxDate" value=@ViewData["maxDate"] />
+            </div>
+            <button type="submit" id="filtrar" class="btn btn-success">Filtrar</button>
+        </form>
+    </div>
+</nav>
+
+<div class="panel panel-default">
+    <ul class="nav nav-pills">
+        <li role="presentation" class="active"><a asp-action="Painel">Painel Detalhado</a></li>
+
+        <li role="presentation" class="active"><a asp-action="EmpresasAtivas">Empresas Ativas</a></li>
+
+        <li role="presentation" onCLick="window.open('https://www.nfe.fazenda.gov.br/portal/disponibilidade.aspx?versao=0.00&tipoConteudo=Skeuqr8PQBY=','_blank');" class="active"><a>Consultar Status Receita</a></li>
+    </ul>
+</div>
+
+
+
+<tr>
+    <td>
+        <span>
+            Listando registros de @Model.FirstItemOnPage
+            a @Model.LastItemOnPage de um total de @Model.TotalItemCount
+        </span>
+    </td>
+</tr>
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+    </div>
+    <div class="panel-body">
+        <table class="table table-hover">
+            <thead>
+                <tr class="active">
+                    <th>
+                        Cnpj
+                    </th>
+                    <th>
+                        Série
+                    </th>
+                    <th>
+                        Data
+                    </th>
+                    <th>
+                        Nota
+                    </th>
+                    <th>
+                        Retorno
+                    </th>
+                    <th>
+                        Movimento
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.cnpj)
+                            <a asp-action="DetailsEmp"
+                               asp-route-cnpj="@item.cnpj">
+                                <i class="fas fa-home"></i>
+                            </a>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.nr_serie)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.dt_termino)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.nfnumero)
+                        </td>
+                        <td>
+                            @if (item.status == "E")
+                            {
+                                @Html.TextBoxFor(m => item.retorno, new { @style = "color: red;", @class = "form-control", @readonly = true })
+                            }
+                            else
+                            {
+                                @Html.TextBoxFor(model => item.retorno, new { @class = "form-control", @style = "width:400px;", @readonly = true })
+                            }
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.movimento)
+                        </td>
+                        <td>
+                        <td>
+                            <a asp-action="Details"
+                               asp-route-cnpj="@item.cnpj"
+                               asp-route-nfnumero="@item.nfnumero"
+                               asp-route-dt_termino="@item.dt_termino" class="btn btn-sm btn-success">
+                                Detalhar
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div class="row">
+                <span class="pull-right">
+                    @Html.PagedListPager(Model, page => Url.Action("PainelGeral", new { page, minDate, maxDate }))
+                </span>
+            </div>
+        </div>
+    </div>
+
+<style>
+    .nomenav {
+        padding-top: 50px;
+        font-size: 20px;
+    }
+</style>
