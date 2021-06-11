@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Dev\\Painel\\RelatoriosWeb\\RelatoriosWeb.csproj": {}
+    "C:\\Dev\\Painel\\RelatoriosWeb.csproj": {}
   },
   "projects": {
-    "C:\\Dev\\Painel\\RelatoriosWeb\\RelatoriosWeb.csproj": {
+    "C:\\Dev\\Painel\\RelatoriosWeb.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Dev\\Painel\\RelatoriosWeb\\RelatoriosWeb.csproj",
+        "projectUniqueName": "C:\\Dev\\Painel\\RelatoriosWeb.csproj",
         "projectName": "RelatoriosWeb",
-        "projectPath": "C:\\Dev\\Painel\\RelatoriosWeb\\RelatoriosWeb.csproj",
+        "projectPath": "C:\\Dev\\Painel\\RelatoriosWeb.csproj",
         "packagesPath": "C:\\Users\\usuario\\.nuget\\packages\\",
-        "outputPath": "C:\\Dev\\Painel\\RelatoriosWeb\\obj\\",
+        "outputPath": "C:\\Dev\\Painel\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\usuario\\AppData\\Roaming\\NuGet\\NuGet.Config",

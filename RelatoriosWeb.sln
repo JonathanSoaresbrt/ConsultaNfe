@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29806.167
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RelatoriosWeb", "RelatoriosWeb\RelatoriosWeb.csproj", "{EEB490EA-A1B7-4704-B452-48F2C74ABF16}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RelatoriosWeb", "RelatoriosWeb.csproj", "{EEB490EA-A1B7-4704-B452-48F2C74ABF16}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
